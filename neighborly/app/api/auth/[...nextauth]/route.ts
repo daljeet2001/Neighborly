@@ -19,18 +19,22 @@ export const authOptions = {
         if (!user || !user.password) return null;
         const valid = await bcrypt.compare(credentials.password, user.password);
         if (!valid) return null;
-        return { id: user.id, name: user.name, email: user.email };
+        return { id: user.id, name: user.name, email: user.email, neighborhoodId: user.neighborhoodId };
       },
     }),
   ],
   session: { strategy: 'jwt' },
   callbacks: {
     async jwt({ token, user }: { token: JWT; user?: any }) {
-      if (user) token.id = (user as any).id;
+     if (user) {
+      token.id = user.id;
+      token.neighborhoodId = user.neighborhoodId;
+    }
       return token;
     },
     async session({ session, token }: { session: Session; token: JWT }) {
       (session as any).user.id = token.id;
+      (session.user as any).neighborhoodId = token.neighborhoodId;
       return session;
     },
   },

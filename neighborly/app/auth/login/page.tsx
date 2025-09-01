@@ -15,7 +15,7 @@ export default function LoginPage() {
     setLoading(true);
     const res = await signIn('credentials', { redirect: false, email, password });
     setLoading(false);
-    if (res?.ok) router.push('/');
+    if (res?.ok) router.push('/home');
     else alert('Invalid credentials');
   };
 

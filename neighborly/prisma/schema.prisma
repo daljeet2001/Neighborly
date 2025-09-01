@@ -26,7 +26,7 @@ model Neighborhood {
   id      String  @id @default(cuid())
   name    String  @unique
   city    String?
-  pincode String?
+  pincode String? @unique
   users   User[]
   posts   Post[]
   services Service[]
