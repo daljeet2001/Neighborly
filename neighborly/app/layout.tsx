@@ -4,8 +4,14 @@ import Providers from "./components/Providers";
 import { SocketProvider } from "@/app/socket.context";
 import Header from "./components/Header";
 import { Socket } from "dgram";
+import { Nunito } from "next/font/google";
 
-const inter = Inter({ subsets: ["latin"] });
+const nunito = Nunito({
+  subsets: ["latin"], 
+  weight: ["400", "600", "700"], 
+});
+
+
 
 export const metadata = {
   title: "Neighborhood",
@@ -15,7 +21,7 @@ export const metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body className={inter.className + " bg-gray-50 min-h-screen"}>
+      <body className={nunito.className + " bg-gray-50 min-h-screen"}>
         <SocketProvider>
         <Providers>
           <Header />

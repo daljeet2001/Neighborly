@@ -2,6 +2,7 @@
 import { useState } from "react";
 import React from "react";
 import { useSession } from "next-auth/react";
+import { Heart, MessageCircle, Share2, MoreHorizontal, Globe } from "lucide-react";
 
 export default function PostCard({
   post,
@@ -10,7 +11,6 @@ export default function PostCard({
   post: any;
   onClose?: (id: string) => void;
 }) {
-
   const { data: session } = useSession();
 
   const handleClose = async () => {
@@ -23,47 +23,65 @@ export default function PostCard({
     if (res.ok && onClose) onClose(post.id);
   };
 
-  const isOwner = session?.user?.id === post.userId; 
+  const isOwner = session?.user?.id === post.userId;
 
   return (
-    <article className="bg-white p-4 rounded shadow">
-      <div className="flex justify-between items-start">
-        <div>
-          <h3 className="font-semibold">{post.title}</h3>
-          <p className="text-sm text-gray-700 mt-1">{post.description}</p>
-          <div className="text-xs text-gray-500 mt-2">
-            By: {post.user?.name ?? post.user?.email}
+    <article className="bg-white border border-gray-200 rounded-2xl shadow-sm p-4">
+      {/* Top Section */}
+      <div className="flex items-start gap-3">
+        {/* Avatar */}
+        <div className="flex items-center justify-center w-10 h-10 rounded-full bg-gray-200 text-gray-600 font-semibold">
+          {post.user?.name?.[0] ?? "U"}
+        </div>
+
+        <div className="flex-1">
+          <div className="flex items-center gap-1 text-sm font-semibold text-gray-900">
+            {post.user?.name ?? post.user?.email}
+          </div>
+          <div className="flex items-center text-xs text-gray-500 gap-1">
+            {new Date(post.createdAt).toLocaleDateString()} ·{" "}
+            <Globe className="w-3 h-3" />
           </div>
         </div>
-        <div className="text-xs text-gray-500">
-          {new Date(post.createdAt).toLocaleString()}
-        </div>
       </div>
-      <div className="flex gap-2 mt-3">
-        <span className="px-2 py-1 rounded bg-gray-100 text-xs">
-          {post.category}
-        </span>
-        <span
-          className={`px-2 py-1 rounded text-xs ${
-            post.status === "open"
-              ? "bg-green-50 text-green-700"
-              : "bg-gray-100 text-gray-600"
-          }`}
+
+      {/* Post Content */}
+      <div className="mt-3 text-gray-800 text-sm leading-relaxed">
+        <h2>{post.title}</h2>
+        {post.description}
+      </div>
+
+      {/* Actions */}
+      {/* <div className="flex items-center justify-between mt-4">
+        <div className="flex items-center gap-6">
+          <button className="flex items-center gap-1 text-gray-600 hover:text-[#0D1164]">
+            <Heart className="w-5 h-5" /> <span className="text-sm">6</span>
+          </button>
+          <button className="flex items-center gap-1 text-gray-600 hover:text-[#0D1164]">
+            <MessageCircle className="w-5 h-5" /> <span className="text-sm">6</span>
+          </button>
+        </div>
+
+        <div className="flex items-center gap-4">
+          <button className="p-2 rounded-full hover:bg-gray-100">
+            <Share2 className="w-5 h-5 text-gray-600" />
+          </button>
+          <button className="p-2 rounded-full hover:bg-gray-100">
+            <MoreHorizontal className="w-5 h-5 text-gray-600" />
+          </button>
+        </div>
+      </div> */}
+
+      {/* Owner Action */}
+      {/* {isOwner && (
+        <button
+          onClick={handleClose}
+          className="mt-3 text-xs text-red-500 underline"
         >
-          {post.status}
-        </span>
-        <button onClick={handleClose} className="ml-auto text-sm underline">
           Close
         </button>
-      </div>
-
-
-  
-
-
-   
+      )} */}
     </article>
   );
 }
-
 

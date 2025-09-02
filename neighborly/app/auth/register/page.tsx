@@ -16,15 +16,14 @@ export default function RegisterPage() {
   // Auto-fetch city from pincode using OpenStreetMap API
   useEffect(() => {
     const fetchCity = async () => {
-      if (pincode.length < 5) return; // only fetch when enough digits
+      if (pincode.length < 5) return;
       try {
         const res = await fetch(
           `https://nominatim.openstreetmap.org/search?postalcode=${pincode}&country=India&format=json`
         );
         const data = await res.json();
-        console.log(data);
         if (data.length > 0) {
-          setCity(data[0].display_name); // pick first part (city/locality)
+          setCity(data[0].display_name);
         }
       } catch (err) {
         console.error('City lookup failed', err);
@@ -53,58 +52,72 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="max-w-md mx-auto p-6 bg-white rounded shadow mt-8">
-      <h2 className="text-xl font-semibold mb-4">Register</h2>
-      <form onSubmit={submit} className="space-y-3">
-     <input
-  placeholder="Name"
-  value={name}
-  onChange={(e) => setName(e.target.value)}
-  className="w-full border p-2 rounded"
-  autoComplete="name"
-/>
+    <div className="flex items-center justify-center  px-4">
+      <div className="w-full max-w-md  p-8">
+        <h2 className="text-2xl font-bold mb-6 text-gray-800">
+          Create an Account
+        </h2>
+        <form onSubmit={submit} className="space-y-4">
+          <input
+            placeholder="Full Name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-[#0D1164] focus:outline-none"
+            autoComplete="name"
+          />
 
-<input
-  placeholder="Email"
-  type="email"
-  value={email}
-  onChange={(e) => setEmail(e.target.value)}
-  className="w-full border p-2 rounded"
-  autoComplete="email"
-/>
+          <input
+            placeholder="Email Address"
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-[#0D1164] focus:outline-none"
+            autoComplete="email"
+          />
 
-<input
-  placeholder="Password"
-  type="password"
-  value={password}
-  onChange={(e) => setPassword(e.target.value)}
-  className="w-full border p-2 rounded"
-  autoComplete="new-password"
-/>
+          <input
+            placeholder="Password"
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-[#0D1164] focus:outline-none"
+            autoComplete="new-password"
+          />
 
-<input
-  placeholder="Pincode"
-  value={pincode}
-  onChange={(e) => setPincode(e.target.value)}
-  className="w-full border p-2 rounded"
-  autoComplete="postal-code"
-/>
+          <input
+            placeholder="Pincode"
+            value={pincode}
+            onChange={(e) => setPincode(e.target.value)}
+            className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-[#0D1164] focus:outline-none"
+            autoComplete="postal-code"
+          />
 
-<input
-  placeholder="City"
-  value={city}
-  onChange={(e) => setCity(e.target.value)}
-  className="w-full border p-2 rounded"
-  autoComplete="address-level2"
-/>
+          <input
+            placeholder="City"
+            value={city}
+            onChange={(e) => setCity(e.target.value)}
+            className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-[#0D1164] focus:outline-none"
+            autoComplete="address-level2"
+          />
 
-        <button
-          disabled={loading}
-          className="w-full bg-blue-600 text-white p-2 rounded"
-        >
-          {loading ? 'Creating...' : 'Register'}
-        </button>
-      </form>
+          <button
+            disabled={loading}
+            className="w-full bg-[#0D1164] text-white font-semibold py-2 rounded-lg transition hover:bg-opacity-90 disabled:opacity-50"
+          >
+            {loading ? 'Creating...' : 'Register'}
+          </button>
+        </form>
+
+        <p className="text-sm text-gray-600 text-center mt-6">
+          Already have an account?{' '}
+          <a
+            href="/auth/login"
+            className="text-[#0D1164] font-medium hover:underline"
+          >
+            Login
+          </a>
+        </p>
+      </div>
     </div>
   );
 }
