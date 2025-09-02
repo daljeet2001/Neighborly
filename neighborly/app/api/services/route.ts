@@ -3,6 +3,7 @@ import { prisma } from '@/lib/prisma';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 
+
 export async function GET(req: Request) {
   const url = new URL(req.url);
   const neighborhoodId = url.searchParams.get('neighborhoodId') ?? undefined;

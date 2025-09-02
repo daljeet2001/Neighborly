@@ -112,6 +112,12 @@ socket.removeEventListener("message", handleMessage);
               >
                 Logout
               </button>
+                  <Link href="/chat" className="text-sm">
+                Messages
+              </Link>
+                       <Link href="/home" className="text-sm">
+                Home
+              </Link>
             </>
           ) : (
             <>
