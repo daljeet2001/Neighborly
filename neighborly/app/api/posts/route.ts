@@ -19,20 +19,17 @@ export async function POST(req: Request) {
   if (!session) return new Response(null, { status: 401 });
 
   const body = await req.json();
-  const { title, description, category, neighborhoodId, lat, lng } = body;
+  const { postbody, photo, neighborhoodId, lat, lng } = body;
 
-  if (!title || !description || !neighborhoodId) {
+  if (!postbody  || !neighborhoodId) {
     return new Response(JSON.stringify({ error: 'Missing fields' }), { status: 400 });
   }
 
   const post = await prisma.post.create({
     data: {
-      title,
-      description,
-      category,
+      body:postbody,
+      photo,
       neighborhoodId,
-      lat: lat ? Number(lat) : undefined,
-      lng: lng ? Number(lng) : undefined,
       userId: (session as any).user.id,
     },
     include: { user: true },
@@ -56,7 +53,7 @@ export async function PATCH(req: Request) {
   // Only owner can update status
   if (existing.userId !== (session as any).user.id) return new Response(null, { status: 403 });
 
-  const post = await prisma.post.update({ where: { id: postId }, data: { status } });
+  const post = await prisma.post.update({ where: { id: postId }, data: {  } });
   return NextResponse.json(post);
 }
 

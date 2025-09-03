@@ -19,17 +19,14 @@ export async function POST(req: Request) {
   if (!session) return new Response(null, { status: 401 });
 
   const body = await req.json();
-  const { title, description, price, neighborhoodId, lat, lng } = body;
-  if (!title || !neighborhoodId) return new Response(JSON.stringify({ error: 'Missing fields' }), { status: 400 });
+  const { servicebody,photo, neighborhoodId, lat, lng } = body;
+  if (!servicebody || !neighborhoodId) return new Response(JSON.stringify({ error: 'Missing fields' }), { status: 400 });
 
   const service = await prisma.service.create({
     data: {
-      title,
-      description,
-      price: price ? Number(price) : undefined,
+      body:servicebody,
+      photo,
       neighborhoodId,
-      lat: lat ? Number(lat) : undefined,
-      lng: lng ? Number(lng) : undefined,
       userId: (session as any).user.id,
     },
     include: { user: true },
