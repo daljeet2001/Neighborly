@@ -8,7 +8,7 @@ export function SocketProvider({ children }: { children: React.ReactNode }) {
   const [socket, setSocket] = useState<WebSocket | null>(null);
 
   useEffect(() => {
-    const ws = new WebSocket("ws://localhost:4001");
+    const ws = new WebSocket("https://neighborly-2ehx.onrender.com");
 
     ws.onopen = () => console.log("✅ WS connected");
     ws.onclose = () => console.log("❌ WS disconnected");
