@@ -3,12 +3,13 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { NextResponse } from "next/server";
 
-// Correct typing for params
-export async function GET(
-  req: Request,
-  context: { params: { userId: string } }
-) {
-  const { userId } = context.params;
+// Define our own context type
+interface Context {
+  params: { userId: string };
+}
+
+export async function GET(req: Request, { params }: Context) {
+  const { userId } = params;
 
   const session = await getServerSession(authOptions);
 
