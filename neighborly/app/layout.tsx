@@ -16,7 +16,10 @@ const nunito = Nunito({
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
 
-  const hideFooter = pathname.startsWith("/chat"); 
+ const hideFooter =
+    pathname.startsWith("/chat") ||
+    pathname.startsWith("/auth/login") ||
+    pathname.startsWith("/auth/register");
 
   return (
     <html lang="en">
