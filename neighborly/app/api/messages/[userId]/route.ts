@@ -3,8 +3,12 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { NextResponse } from "next/server";
 
-export async function GET(req: Request, { params }: any) {
-  const { userId } = params;
+// Correct typing for params
+export async function GET(
+  req: Request,
+  context: { params: { userId: string } }
+) {
+  const { userId } = context.params;
 
   const session = await getServerSession(authOptions);
 
