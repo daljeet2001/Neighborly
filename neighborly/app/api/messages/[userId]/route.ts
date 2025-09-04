@@ -4,9 +4,10 @@ import { authOptions } from "@/lib/auth";
 
 export async function GET(
   req: Request,
-  context: { params: { userId: string } }
+  { params }: { params: { userId: string } }
 ) {
-  const { userId } = context.params; // ✅ no await
+  const { userId } = params;
+
 
   const session = await getServerSession(authOptions);
 
