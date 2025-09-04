@@ -1,13 +1,14 @@
 import { prisma } from "@/lib/prisma";
 import { getServerSession } from "next-auth";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { authOptions } from "@/lib/auth"; // better: import directly from lib/auth
 
 export async function GET(
   req: Request,
-  context: { params: Promise<{ userId: string }> }
+  context: { params: { userId: string } }
 ) {
-  const { userId } = await context.params;
-  const session = await getServerSession(authOptions as any);
+  const { userId } = context.params; // ✅ no await
+
+  const session = await getServerSession(authOptions);
 
   if (!session) {
     return new Response("Unauthorized", { status: 401 });
@@ -22,11 +23,10 @@ export async function GET(
     },
     orderBy: { createdAt: "asc" },
     include: {
-      sender: { select: { id: true, name: true, email: true } },  
-      receiver: { select: { id: true, name: true, email: true } }
+      sender: { select: { id: true, name: true, email: true } },
+      receiver: { select: { id: true, name: true, email: true } },
     },
   });
-  console.log(messages);
 
   return Response.json(messages);
 }
