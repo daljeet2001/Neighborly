@@ -2,10 +2,7 @@
 import { NextRequest } from "next/server";
 import { prisma } from "@/lib/prisma";
 
-export async function GET(
-  _req: NextRequest,
-  { params }: { params: { userId: string } }
-) {
+export async function GET(_req: NextRequest, { params }: any) {
   const { userId } = params;
 
   const messages = await prisma.message.findMany({
@@ -34,3 +31,4 @@ export async function GET(
 
   return Response.json(Object.values(conversations));
 }
+
