@@ -25,7 +25,7 @@ export default function LandingPage() {
     <div className="w-full max-w-7xl">
     
       <AuthCard />
-    <div className="flex flex-col gap-4 w-full md:flex-row md:flex-wrap">
+    <div className="flex flex-col gap-4 w-full md:flex-row ">
   <FeatureCard
     bgImage="https://d19rpgkrjeba2z.cloudfront.net/static/gen/9177d51f4d2aeb7aa922.jpg"
     mainImage="https://images.unsplash.com/photo-1698768194564-bd8ac2f4ea94?w=900&auto=format&fit=crop&q=60"
