@@ -3,12 +3,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { NextResponse } from "next/server";
 
-// Define our own context type
-interface Context {
-  params: { userId: string };
-}
-
-export async function GET(req: Request, { params }: Context) {
+export async function GET(req: Request, { params }: any) {
   const { userId } = params;
 
   const session = await getServerSession(authOptions);
