@@ -62,7 +62,7 @@ export default function RegisterPage() {
             placeholder="Full Name"
             value={name}
             onChange={(e) => setName(e.target.value)}
-            className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-[#0D1164] focus:outline-none"
+            className="w-full rounded-xl border border-gray-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#0D1164]"
             autoComplete="name"
           />
 
@@ -71,7 +71,7 @@ export default function RegisterPage() {
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-[#0D1164] focus:outline-none"
+            className="w-full rounded-xl border border-gray-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#0D1164]"
             autoComplete="email"
           />
 
@@ -80,7 +80,7 @@ export default function RegisterPage() {
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-[#0D1164] focus:outline-none"
+            className="w-full rounded-xl border border-gray-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#0D1164]"
             autoComplete="new-password"
           />
 
@@ -88,7 +88,7 @@ export default function RegisterPage() {
             placeholder="Pincode"
             value={pincode}
             onChange={(e) => setPincode(e.target.value)}
-            className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-[#0D1164] focus:outline-none"
+            className="w-full rounded-xl border border-gray-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#0D1164]"
             autoComplete="postal-code"
           />
 
@@ -96,13 +96,13 @@ export default function RegisterPage() {
             placeholder="City"
             value={city}
             onChange={(e) => setCity(e.target.value)}
-            className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-[#0D1164] focus:outline-none"
+            className="w-full rounded-xl border border-gray-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#0D1164]"
             autoComplete="address-level2"
           />
 
           <button
             disabled={loading}
-            className="w-full bg-[#0D1164] text-white font-semibold py-2 rounded-lg transition hover:bg-opacity-90 disabled:opacity-50"
+            className="w-full rounded-full bg-[#0D1164] text-white py-3 font-semibold hover:bg-opacity-90 transition"
           >
             {loading ? 'Creating...' : 'Register'}
           </button>
